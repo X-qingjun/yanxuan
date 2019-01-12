@@ -1,29 +1,48 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
     <router-view/>
+    <tab-bar>
+      <tab-item v-for="tabItem in tabList" :key="tabItem.title" :info="tabItem"></tab-item>
+    </tab-bar>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+<script>
+export default {
+  data() {
+    return {
+      tabList: [
+        {
+          title: "首页",
+          path: "/home",
+          index: 2
+        },
+        {
+          title: "分类",
+          path: "/categroy",
+          index: 1
+        },
+        {
+          title: "识物",
+          path: "/topic",
+          index: 3
+        },
+        {
+          title: "购物车",
+          path: "/cart",
+          index: 0
+        },
+        {
+          title: "个人",
+          path: "/mine",
+          index: 4
+        }
+      ]
+    };
   }
-}
+};
+</script>
+
+<style lang="scss" scoped>
 </style>
+
