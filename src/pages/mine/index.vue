@@ -1,30 +1,17 @@
 <template>
-  <div id="mine" class="page">
-    <h1>个人</h1>
-    <scroller :width="200" :height="200">
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-    </scroller>
-  </div>
+<div id="mine" class="page">
+    <h1>我的</h1>
+</div>
 </template>
 
 <script>
-export default {};
+export default {
+
+}
 </script>
 
 <style>
-#mine {
-  background: green;
+#mine{
+    background: papayawhip;
 }
 </style>

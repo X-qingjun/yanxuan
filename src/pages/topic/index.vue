@@ -1,15 +1,17 @@
 <template>
-  <div id="topic" class="page">
+<div id="topic" class="page">
     <h1>识物</h1>
-  </div>
+</div>
 </template>
 
 <script>
-export default {};
+export default {
+
+}
 </script>
 
 <style>
-#topic {
-  background: blue;
+#topic{
+    background: paleturquoise;
 }
 </style>

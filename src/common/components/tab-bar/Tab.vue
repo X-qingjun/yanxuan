@@ -15,7 +15,7 @@ export default {
     style() {
       let offset = this.info.index * -61;
       if (this.$route.path !== this.info.path) {
-        offset -= 31;
+        offset -= 30.5;
       }
       return {
         transform: `translateY(${offset}px)`
@@ -33,13 +33,18 @@ export default {
 }
 .tab div {
   width: 26px;
-  height: 31px;
+  height: 30px;
   overflow: hidden;
   margin: 0 auto;
   padding-top: 2px;
 }
 .tab div img {
   width: 100%;
+  /* transform: translateY(-61px); */
+  /*
+    选中图片平移： index*-61px
+    未选中平移：index*-61+30.5
+    */
 }
 .tab span {
   display: block;

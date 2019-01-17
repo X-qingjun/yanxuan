@@ -8,7 +8,7 @@
             v-for="(item, index) in list"
             :key="item.id"
             class="nav-item"
-            :class="{active: selectIndex===index}"
+            :class="{active: value===index}"
             ref="item"
             @click="selectTab(index)"
           >{{item.name}}</li>
@@ -22,7 +22,7 @@
           <li
             v-for="(item, index) in list"
             :key="item.id"
-            :class="{active: selectIndex===index}"
+            :class="{active: value===index}"
             @click="selectTab(index)"
           >{{item.name}}</li>
         </ul>
@@ -43,11 +43,11 @@
 import { getHomeCateList } from "../../services/homeService";
 import BScroll from "better-scroll";
 export default {
+  props: ["value"],
   data() {
     return {
       list: [],
-      showMenu: false,
-      selectIndex: 0
+      showMenu: false
     };
   },
   methods: {
@@ -55,16 +55,17 @@ export default {
       this.showMenu = !this.showMenu;
     },
     selectTab(index) {
-      console.log(index);
-      this.selectIndex = index;
+      // console.log(index);
       this.showMenu = false;
+      // 告诉首页组件选中下标
+      this.$emit("input", index);
     }
   },
   created() {
     //请求分类数据
     getHomeCateList().then(data => {
       //得到结果
-      this.list = data;
+      this.list = [{ name: "推荐", id: "-1" }, ...data];
       this.$nextTick(() => {
         //识别宽度
         let width = 0;
@@ -101,7 +102,7 @@ export default {
     .nav-item {
       display: inline-block;
       padding: 0 10px;
-      font-size: 12px;
+      font-size: 14px;
       line-height: 26px;
       color: #333;
       &.active {
@@ -115,16 +116,29 @@ export default {
   .menu-bar {
     overflow: hidden;
     background: #fff;
-    h1 {
+    h6 {
       font-weight: normal;
       font-size: 14px;
       color: #333;
+      height: 40px;
+      text-indent: 1em;
+      padding-top: 3px;
     }
     .menu {
       li {
-        width: 33%;
+        width: 20%;
+        height: 26px;
+        line-height: 26px;
         float: left;
+        text-align: center;
+        margin-bottom: 20px;
+        margin-left: 13px;
+        background: #fafafa;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        font-size: 12px;
         &.active {
+          border-color: #b4282d;
           color: #b4282d;
         }
       }

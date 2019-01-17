@@ -1,6 +1,6 @@
-const route = {
+const route =  {
     path: '/mine',
-    component: () => import('../pages/mine/index')
+    component: ()=>import('../pages/mine/index')
 }
 
 export default route;

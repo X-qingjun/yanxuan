@@ -1,11 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import homeRoute from './homeRoute'
-import categroyRoute from './categroyRoute'
-import cartRoute from './cartRoute'
+import categoryRoute from './categoryRoute'
 import topicRoute from './topicRoute'
+import cartRoute from './cartRoute'
 import mineRoute from './mineRoute'
-
 Vue.use(Router)
 
 export default new Router({
@@ -13,9 +12,13 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     homeRoute,
-    categroyRoute,
-    cartRoute,
+    categoryRoute,
     topicRoute,
-    mineRoute
+    cartRoute,
+    mineRoute,
+    {
+      path: '/',
+      redirect: '/home'
+    }
   ]
 })

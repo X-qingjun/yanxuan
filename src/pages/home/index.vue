@@ -7,55 +7,44 @@
       </p>
       <span>登录</span>
     </header>
-    <scroller :top="74" :bottom="49">
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-      <p>heheheheheheheheheh</p>
-    </scroller>
+
+    <homeNav v-model="selectIndex" ref="nav"/>
+
+    <homeContent v-show="selectIndex===0"/>
+    <homeCateContent v-show="selectIndex!==0" :data="selectItem"/>
   </div>
 </template>
 
 <script>
-// import homeNav from "../../components/homeCom/homeNav";
+import homeNav from "../../components/homeCom/homeNav";
+import homeContent from "../../components/homeCom/homeContent";
+import homeCateContent from "../../components/homeCom/homeCateContent";
 export default {
-  // components: {
-  //   homeNav
-  // }
+  components: {
+    homeNav,
+    homeContent,
+    homeCateContent
+  },
+  data() {
+    return {
+      selectIndex: 0
+    };
+  },
+  computed: {
+    selectItem() {
+      if (this.selectIndex > 0) {
+        return this.$refs.nav.list[this.selectIndex];
+      } else {
+        return {};
+      }
+    }
+  }
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 #home {
-  background: #fff;
+  background: palegoldenrod;
   .header {
     width: 100%;
     height: 44px;
@@ -63,15 +52,14 @@ export default {
     top: 0;
     left: 0;
     display: flex;
-    padding: 10px 15px;
+    padding: 12px 8px;
     box-sizing: border-box;
-    // background: #eee;
     img {
       height: 100%;
     }
     p {
-      line-height: 25px;
-      font-size: 13px;
+      line-height: 20px;
+      font-size: 12px;
       padding: 0 10px;
       background: #ededed;
       color: #666;
@@ -82,7 +70,7 @@ export default {
     span {
       color: #b4282d;
       border: 1px solid #b4282d;
-      border-radius: 4px;
+      border-radius: 2px;
       font-size: 12px;
       padding: 6px;
       line-height: 8px;
