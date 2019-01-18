@@ -8,7 +8,7 @@
 
     <div class="top-module" :style="{backgroundImage: 'url('+bgUrl+')', backgroundSize: 'cover'}">
       <ul class="policy">
-        <li class="policy-item" v-for="item in policyDescList" :key="item.desc">
+        <li class="policy-item" v-for="item in PolicyList" :key="item.desc">
           <img :src="item.icon">
           <span>{{item.desc}}</span>
         </li>
@@ -25,12 +25,34 @@
         </li>
       </ul>
     </div>
-    <div class="center-module"></div>
+    <div class="center-module">
+      <div class="center-top">
+        <h3>品牌制造商提供</h3>
+        <h5>更多
+          <van-icon name="arrow" class="arrow"/>
+        </h5>
+      </div>
+      <ul class="taglist">
+        <li class="taglist-item" v-for="item in TagList" :key="item.id">
+          <div class="descript">
+            <p>{{item.name}}</p>
+            <p>{{item.floorPrice}}元起</p>
+          </div>
+          <img :src="item.picUrl">
+        </li>
+      </ul>
+    </div>
   </scroller>
 </template>
 
 <script>
-import { getHomeFocusList, getHomeTopData } from "../../services/homeService";
+import {
+  getHomeFocusList,
+  getPolicyList,
+  getHomeList,
+  getHomeActivity,
+  getHomeTagList
+} from "../../services/homeService";
 import Vue from "vue";
 import { Swipe, SwipeItem } from "vant";
 Vue.use(Swipe).use(SwipeItem);
@@ -39,10 +61,11 @@ export default {
     return {
       bannerData: [],
       bgUrl: "",
-      policyDescList: [],
+      PolicyList: [],
       kingKongImg: "",
       kingKongList: [],
-      bigPromotionList: []
+      bigPromotionList: [],
+      TagList: []
     };
   },
   created() {
@@ -50,16 +73,23 @@ export default {
     getHomeFocusList().then(data => {
       this.bannerData = data;
     });
-    // 请求推荐的分类板块数据
-    getHomeTopData().then(
-      ({ policyDescList, kingKongData, bigPromotionData, bgUrl }) => {
-        this.policyDescList = policyDescList;
-        this.kingKongImg = kingKongData.background;
-        this.kingKongList = kingKongData.list;
-        this.bigPromotionList = bigPromotionData;
-        this.bgUrl = bgUrl;
-      }
-    );
+    // 请求网易严选协议
+    getPolicyList().then(data => {
+      this.PolicyList = data;
+    });
+    // 首页分类列表
+    getHomeList().then(data => {
+      this.kingKongImg = data.background;
+      this.kingKongList = data.list;
+    });
+    //请求首页活动
+    getHomeActivity().then(data => {
+      this.bgUrl = data.backgroundUrl;
+      this.bigPromotionList = data.bigPromotionData;
+    });
+    getHomeTagList().then(data => {
+      this.TagList = data;
+    });
   }
 };
 </script>
@@ -106,6 +136,7 @@ export default {
   }
 }
 .promotion {
+  border-bottom: 15px solid #e8c092;
   overflow: hidden;
   .promotion-item img {
     width: 50%;
@@ -113,6 +144,52 @@ export default {
   }
   .promotion-item:nth-of-type(1) img {
     width: 100%;
+  }
+}
+.center-module {
+  padding: 10px;
+  border-top: 10px solid #f4f4f4;
+  .center-top {
+    height: 30px;
+    h3 {
+      font-weight: normal;
+      float: left;
+      font-size: 16px;
+    }
+    h5 {
+      font-weight: normal;
+      float: right;
+      font-size: 13px;
+      .arrow {
+        transform: translateY(2px);
+      }
+    }
+  }
+  .taglist {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .taglist-item {
+      width: 49%;
+      margin-top: 5px;
+      .descript {
+        position: absolute;
+        width: 49%;
+        margin-top: 20px;
+        p:nth-of-type(1) {
+          font-size: 14px;
+          text-align: center;
+        }
+        p:nth-of-type(2) {
+          font-size: 12px;
+          color: #777;
+          text-align: center;
+        }
+      }
+      img {
+        width: 100%;
+      }
+    }
   }
 }
 </style>

@@ -8,7 +8,7 @@ import {
 export function getHomeCateList() {
     // 使用async， await
     return new Promise((resolve, reject) => {
-        FetchGet(API.CATELIST_URL)
+        FetchGet(API.CATE_LIST_URL)
             .then(
                 (data) => {
                     // 过滤数据
@@ -33,7 +33,7 @@ export function getHomeCateList() {
 //请求首页轮播图数据;
 export function getHomeFocusList() {
     return new Promise((resolve, reject) => {
-        FetchGet(API.FOCUSLIST_URL)
+        FetchGet(API.HOME_BANNER_LIST_URL)
             .then(data => {
                 let newData = data.map(({
                     id,
@@ -50,31 +50,69 @@ export function getHomeFocusList() {
 }
 
 
-// 请求首页的推荐 分类板块的数据
-export function getHomeTopData() {
+// 请求首页网易严选协议
+export function getPolicyList() {
     return new Promise((resolve, reject) => {
-        FetchGet(API.TOPDATA_URL)
+        FetchGet(API.POLICY_LIST_URL)
+            .then(data => {
+                resolve(data);
+            })
+    })
+}
+
+// 请求首页分类列表
+export function getHomeList() {
+    return new Promise((resolve, reject) => {
+        FetchGet(API.HOME_CATE_LIST_URL)
             .then(data => {
                 resolve({
-                    policyDescList: data.policyDescList,
-                    kingKongData: {
-                        background: data.kingKongModule.background,
-                        list: data.kingKongModule.kingKongList.map(({
-                            sequen,
-                            text,
-                            picUrl
-                        }) => ({
-                            id: sequen,
-                            text,
-                            picUrl
-                        }))
-                    },
+                    background: data.background,
+                    list: data.kingKongList.map(({
+                        text,
+                        picUrl
+                    }) => ({
+                        text,
+                        picUrl
+                    }))
+                })
+            })
+    })
+}
+
+//请求首页活动
+export function getHomeActivity() {
+    return new Promise((resolve, reject) => {
+        FetchGet(API.HOME_ACTIVITY_URL)
+            .then(data => {
+                resolve({
+                    backgroundUrl: data.backgroundUrl,
                     bigPromotionData: [
-                        data.bigPromotionModule.bigPromotionList[0].data.contents[0],
-                        ...data.bigPromotionModule.bigPromotionList[1].data.contents
-                    ],
-                    bgUrl: data.bigPromotionModule.backgroundUrl
-                });
+                        data.bigPromotionList[0].data.contents[0],
+                        ...data.bigPromotionList[1].data.contents
+                    ]
+                })
+            })
+    })
+}
+
+
+//请求品牌制造商直供
+export function getHomeTagList() {
+    return new Promise((resolve, reject) => {
+        FetchGet(API.HOME_TAG_LIST_URL)
+            .then(data => {
+                let newData = data.map(({
+                    id,
+                    floorPrice,
+                    picUrl,
+                    name
+                }) => ({
+                    id,
+                    floorPrice,
+                    picUrl,
+                    name
+                }));
+                resolve(newData);
             })
     })
 }
@@ -120,7 +158,7 @@ export function getHomeCateDetail(id) {
 // 请求分类列表的数据
 export function getCategoryList() {
     return new Promise((resolve, reject) => {
-        FetchGet(API.CATEGORY_LIST_URL)
+        FetchGet(API.CATEGOEY_LIST_URL)
             .then(data => {
                 let newData = data.map(item => {
                     return {
