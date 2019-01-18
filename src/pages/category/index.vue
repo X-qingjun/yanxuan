@@ -25,7 +25,7 @@
         :forword="handleContentforword"
         :next="handleContentNext"
       >
-        <img class="banner" :src="navData[selectIndex].wapBannerUrl">
+        <img class="banner" v-lazy="navData[selectIndex].wapBannerUrl">
 
         <ul class="content-list">
           <li
@@ -33,7 +33,7 @@
             v-for="value in navData[selectIndex].subCateList"
             :key="value.id"
           >
-            <img :src="value.bannerUrl">
+            <img v-lazy="value.bannerUrl">
             <p>{{value.name}}</p>
           </li>
         </ul>

@@ -1,6 +1,6 @@
 <template>
   <scroller :top="74" :bottom="49" ref="scroller">
-    <img class="banner" :src="bannerUrl">
+    <img class="banner" v-lazy="bannerUrl">
 
     <div v-for="itemList in list" :key="itemList.id">
       <h3>{{itemList.name}}</h3>

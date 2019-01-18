@@ -118,6 +118,26 @@ export function getHomeTagList() {
 }
 
 
+//请求类目热销榜
+export function getHomeCateSell() {
+    return new Promise((resolve, reject) => {
+        FetchGet(API.HOME_CATE_HOT_SELL_URL)
+            .then(data => {
+                resolve({
+                    title: data.title,
+                    cateList: data.categoryList.map(({
+                        categoryName,
+                        picUrl
+                    }) => ({
+                        categoryName,
+                        picUrl
+                    }))
+                })
+            })
+    })
+}
+
+
 //请求首页的分类数据
 export function getHomeCateDetail(id) {
     return new Promise((resolve, reject) => {
