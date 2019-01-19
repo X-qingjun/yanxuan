@@ -44,10 +44,15 @@
         </ul>
       </div>
       <div class="center-two">
-        <h3>{{title}}</h3>
+        <div class="center-top">
+          <h3>{{title}}</h3>
+        </div>
         <ul class="catelist">
           <li class="catelist-item" v-for="item in cataList" :key="item.categoryName">
-            <div class="item-left">{{item.categoryName}}</div>
+            <div class="item-name">
+              <div class="border"></div>
+              {{item.categoryName}}
+            </div>
             <img v-lazy="item.picUrl">
           </li>
         </ul>
@@ -78,7 +83,7 @@ export default {
       kingKongList: [],
       bigPromotionList: [],
       TagList: [],
-      item: "",
+      title: "",
       cataList: []
     };
   },
@@ -165,9 +170,9 @@ export default {
   }
 }
 .center-module {
-  padding: 10px;
-  border-top: 10px solid #f4f4f4;
   .center-one {
+    border-top: 10px solid #f4f4f4;
+    padding: 10px;
     .center-top {
       height: 30px;
       h3 {
@@ -208,6 +213,73 @@ export default {
         img {
           width: 100%;
         }
+      }
+    }
+  }
+  .center-two {
+    border-top: 10px solid #f4f4f4;
+    padding: 10px;
+    .center-top {
+      height: 30px;
+      h3 {
+        font-weight: normal;
+        font-size: 16px;
+      }
+    }
+    .catelist {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      .catelist-item {
+        width: 24%;
+        background: #f5f5f5;
+        margin-top: 5px;
+        .item-name {
+          font-size: 12px;
+          text-align: center;
+          .border {
+            display: none;
+          }
+        }
+        img {
+          width: 70%;
+          height: 70%;
+          margin: 0 auto;
+        }
+      }
+      .catelist-item:nth-of-type(1),
+      .catelist-item:nth-of-type(2) {
+        width: 49%;
+        .item-name {
+          width: 40%;
+          height: 100%;
+          float: left;
+          font-size: 15px;
+          line-height: 90px;
+          position: relative;
+          .border {
+            display: block;
+            width: 25px;
+            height: 2px;
+            overflow: hidden;
+            background: #333;
+            font-weight: bold;
+            position: absolute;
+            left: 12px;
+            top: 60px;
+          }
+        }
+        img {
+          float: left;
+          width: 60%;
+          height: 100%;
+        }
+      }
+      .catelist-item:nth-of-type(1) {
+        background: #f9f3e4;
+      }
+      .catelist-item:nth-of-type(2) {
+        background: #ebeff6;
       }
     }
   }
